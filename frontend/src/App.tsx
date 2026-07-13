@@ -3,17 +3,7 @@ import { AuthProvider, useAuth } from './context/AuthContext';
 import Navbar from './components/Navbar';
 import Login from './pages/Login';
 import Register from './pages/Register';
-import type { ReactNode } from 'react';
 import './App.css';
-
-const ProtectedRoute = ({ children, requiredRole }: { children: ReactNode; requiredRole?: string }) => {
-  const { user } = useAuth();
-  if (!user) return <Navigate to="/login" />;
-  if (requiredRole && user.Ruolo !== requiredRole) {
-    return <Navigate to="/dashboard" />;
-  }
-  return children;
-};
 
 const AppContent = () => {
   const { user } = useAuth();
