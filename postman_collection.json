@@ -1,0 +1,56 @@
+{
+  "info": {
+    "name": "API Template",
+    "description": "API collection generata dal template",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Nome\": \"Test\",\n  \"Cognome\": \"User\",\n  \"Email\": \"test@demo.com\",\n  \"Password\": \"password123\",\n  \"Ruolo\": \"user\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3001/api/utenti/register",
+              "host": ["http://localhost:3001"],
+              "path": ["api", "utenti", "register"]
+            }
+          }
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Email\": \"admin@demo.com\",\n  \"Password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3001/api/utenti/login",
+              "host": ["http://localhost:3001"],
+              "path": ["api", "utenti", "login"]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "token",
+      "value": "inserisci_il_token_qui"
+    }
+  ]
+}
