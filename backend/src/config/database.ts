@@ -12,7 +12,7 @@ const pool: Pool = mysql.createPool({
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0,
-  ssl: process.env.DB_SSL === 'true' ? {} as any : undefined,
+  ssl: process.env.DB_SSL === 'true' ? { rejectUnauthorized: false } as any : undefined,
 });
 
 export const getConnection = async (): Promise<PoolConnection> => {
