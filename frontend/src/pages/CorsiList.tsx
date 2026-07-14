@@ -109,8 +109,7 @@ const CorsiList = () => {
                 <td>{c.Attivo ? <span className="badge" style={{ background: 'rgba(16,185,129,0.2)', color: '#6ee7b7' }}>Attivo</span> : <span className="badge" style={{ background: 'rgba(100,100,100,0.2)', color: '#999' }}>Non attivo</span>}</td>
                 <td className="actions-cell">
                   <button className="btn btn-sm btn-primary" onClick={() => { setEditCorso(c); setShowForm(true); }}>Modifica</button>
-                  {c.Attivo && <label htmlFor="">a</label>}
-                  {c.Attivo && <button className="btn btn-sm btn-secondary" onClick={() => disattiva(c.CorsoID)}>Disattiva</button>}
+                  {!!c.Attivo && <button className="btn btn-sm btn-secondary" onClick={() => disattiva(c.CorsoID)}>Disattiva</button>}
                   <button className="btn btn-sm btn-danger" onClick={() => elimina(c.CorsoID, c.Titolo)}>Elimina</button>
                 </td>
               </tr>
