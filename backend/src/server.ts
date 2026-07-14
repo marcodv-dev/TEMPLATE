@@ -3,6 +3,11 @@ import cors from 'cors';
 import path from 'path';
 import dotenv from 'dotenv';
 import authRoutes from './routes/auth';
+import corsiRoutes from './routes/corsi';
+import assegnazioniRoutes from './routes/assegnazioni';
+import dipendentiRoutes from './routes/dipendenti';
+import statisticheRoutes from './routes/statistiche';
+import utentiRoutes from './routes/utenti';
 
 dotenv.config();
 
@@ -12,15 +17,12 @@ const PORT = process.env.PORT || 3001;
 app.use(cors());
 app.use(express.json());
 
-// Auth routes
 app.use('/api/utenti', authRoutes);
-
-/*
-  TODO: Aggiungere le route business in base al documento d'esame.
-  Esempio:
-  import rimborsiRoutes from './routes/rimborsi';
-  app.use('/api/rimborsi', rimborsiRoutes);
-*/
+app.use('/api/utenti', utentiRoutes);
+app.use('/api/corsi', corsiRoutes);
+app.use('/api/assegnazioni-corsi', assegnazioniRoutes);
+app.use('/api/dipendenti', dipendentiRoutes);
+app.use('/api/statistiche', statisticheRoutes);
 
 // Health check
 app.get('/api/health', (_req, res) => {

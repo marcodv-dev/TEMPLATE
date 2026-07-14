@@ -1,22 +1,39 @@
--- ============================================================
--- TODO: Sostituire 'nome_database' con il nome del database
---       richiesto dal documento d'esame.
--- ============================================================
-CREATE DATABASE IF NOT EXISTS nome_database;
-USE nome_database;
+CREATE DATABASE IF NOT EXISTS defaultdb;
+USE defaultdb;
 
--- ============================================================
--- TODO: Creare le tabelle secondo il modello dati del documento.
--- ============================================================
---
--- Esempio tabella utenti (sempre necessaria per l'auth):
--- CREATE TABLE IF NOT EXISTS utenti (
---   UtenteID INT AUTO_INCREMENT PRIMARY KEY,
---   Nome VARCHAR(100) NOT NULL,
---   Cognome VARCHAR(100) NOT NULL,
---   Email VARCHAR(255) NOT NULL UNIQUE,
---   Password VARCHAR(255) NOT NULL,
---   Ruolo VARCHAR(50) NOT NULL DEFAULT 'user',
---   createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
---   updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
--- );
+CREATE TABLE IF NOT EXISTS utenti (
+  UtenteID INT AUTO_INCREMENT PRIMARY KEY,
+  Nome VARCHAR(100) NOT NULL,
+  Cognome VARCHAR(100) NOT NULL,
+  Email VARCHAR(255) NOT NULL UNIQUE,
+  Password VARCHAR(255) NOT NULL,
+  Ruolo VARCHAR(50) NOT NULL DEFAULT 'dipendente',
+  createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS corsi_academy (
+  CorsoID INT AUTO_INCREMENT PRIMARY KEY,
+  Titolo VARCHAR(200) NOT NULL,
+  Descrizione TEXT,
+  Categoria VARCHAR(100) NOT NULL,
+  DurataOre INT NOT NULL CHECK (DurataOre > 0),
+  Obbligatorio BOOLEAN DEFAULT FALSE,
+  Attivo BOOLEAN DEFAULT TRUE,
+  createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS assegnazioni_corsi (
+  AssegnazioneID INT AUTO_INCREMENT PRIMARY KEY,
+  CorsoID INT NOT NULL,
+  DipendenteID INT NOT NULL,
+  DataAssegnazione DATE NOT NULL DEFAULT (CURRENT_DATE),
+  DataScadenza DATE NOT NULL,
+  Stato VARCHAR(20) NOT NULL DEFAULT 'Assegnato',
+  DataCompletamento DATE DEFAULT NULL,
+  createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  FOREIGN KEY (CorsoID) REFERENCES corsi_academy(CorsoID) ON DELETE RESTRICT,
+  FOREIGN KEY (DipendenteID) REFERENCES utenti(UtenteID) ON DELETE RESTRICT
+);

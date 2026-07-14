@@ -13,19 +13,17 @@ const Navbar = () => {
   return (
     <nav>
       <div className="nav-container">
-        <Link to="/" className="nav-logo">App Template</Link>
+        <Link to="/" className="nav-logo">Academy</Link>
         <div className="nav-links">
-          {/*
-            TODO: Aggiungere link in base al ruolo e al documento d'esame.
-            Esempio per ruolo 'user':
-            {user?.Ruolo === 'user' && <Link to="/dashboard">Dashboard</Link>}
-
-            Esempio per ruolo 'admin':
-            {user?.Ruolo === 'admin' && <>
-              <Link to="/admin/gestione">Gestione</Link>
-              <Link to="/admin/statistiche">Statistiche</Link>
-            </>}
-          */}
+          <Link to="/dashboard">Dashboard</Link>
+          {user?.Ruolo === 'dipendente' && <Link to="/mie-assegnazioni">I Miei Corsi</Link>}
+          {user?.Ruolo === 'referente' && (
+            <>
+              <Link to="/corsi">Catalogo Corsi</Link>
+              <Link to="/assegnazioni">Assegnazioni</Link>
+              <Link to="/statistiche">Statistiche</Link>
+            </>
+          )}
           <span className="nav-user">{user?.Nome} {user?.Cognome} ({user?.Ruolo})</span>
           <button onClick={handleLogout} className="btn-logout">Logout</button>
         </div>

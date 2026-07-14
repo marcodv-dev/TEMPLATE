@@ -7,7 +7,7 @@ const Register = () => {
   const [cognome, setCognome] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [ruolo, setRuolo] = useState('user');
+  const [ruolo, setRuolo] = useState('dipendente');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const { register } = useAuth();
@@ -54,15 +54,11 @@ const Register = () => {
             <label>Password</label>
             <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required minLength={6} />
           </div>
-          {/*
-            TODO: Modificare le opzioni del ruolo in base al documento d'esame.
-            Esempio:
-          */}
           <div className="form-group">
             <label>Ruolo</label>
             <select value={ruolo} onChange={(e) => setRuolo(e.target.value)}>
-              <option value="user">Utente</option>
-              <option value="admin">Amministratore</option>
+              <option value="dipendente">Dipendente</option>
+              <option value="referente">Referente Academy</option>
             </select>
           </div>
           <button type="submit" className="btn btn-primary">Registrati</button>

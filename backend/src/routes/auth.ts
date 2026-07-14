@@ -34,7 +34,7 @@ router.post('/register', async (req: Request, res: Response): Promise<void> => {
     const hashedPassword = await bcrypt.hash(Password, 10);
     await pool.execute(
       'INSERT INTO utenti (Nome, Cognome, Email, Password, Ruolo) VALUES (?, ?, ?, ?, ?)',
-      [Nome, Cognome, Email, hashedPassword, Ruolo || 'user']
+      [Nome, Cognome, Email, hashedPassword, Ruolo || 'dipendente']
     );
 
     res.status(201).json({ message: 'Registrazione completata con successo' });

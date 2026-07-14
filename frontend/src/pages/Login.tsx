@@ -21,12 +21,7 @@ const Login = () => {
     setError('');
     try {
       await login(email, password);
-      const user = JSON.parse(localStorage.getItem('user') || '{}');
-      if (user.Ruolo === 'admin') {
-        navigate('/admin');
-      } else {
-        navigate('/dashboard');
-      }
+      navigate('/dashboard');
     } catch (err: any) {
       mostraMessaggio('error', err.response?.data?.error || 'Errore durante il login');
     }
@@ -53,13 +48,9 @@ const Login = () => {
           </div>
           <button type="submit" className="btn btn-primary">Accedi</button>
         </form>
-        {/*
-          TODO: Aggiornare le email dei pulsanti quick-fill in base al seed.
-          Esempio:
-        */}
         <div className="temporaneo">
-          <button type="button" className="btn btn-sm btn-secondary" onClick={() => setEmail('utente@demo.com')}>Utente</button>
-          <button type="button" className="btn btn-sm btn-secondary" onClick={() => setEmail('admin@demo.com')}>Admin</button>
+          <button type="button" className="btn btn-sm btn-secondary" onClick={() => { setEmail('marco.rossi@azienda.com'); setPassword('password123'); }}>Referente</button>
+          <button type="button" className="btn btn-sm btn-secondary" onClick={() => { setEmail('laura.bianchi@azienda.com'); setPassword('password123'); }}>Dipendente</button>
         </div>
         <p className="auth-link">
           Non hai un account? <Link to="/register">Registrati</Link>

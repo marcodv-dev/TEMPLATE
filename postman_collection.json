@@ -1,7 +1,7 @@
 {
   "info": {
-    "name": "API Template",
-    "description": "API collection generata dal template",
+    "name": "Academy API",
+    "description": "API collection per la gestione dell'Academy aziendale",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "item": [
@@ -17,7 +17,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"Nome\": \"Test\",\n  \"Cognome\": \"User\",\n  \"Email\": \"test@demo.com\",\n  \"Password\": \"password123\",\n  \"Ruolo\": \"user\"\n}"
+              "raw": "{\n  \"Nome\": \"Nuovo\",\n  \"Cognome\": \"Dipendente\",\n  \"Email\": \"nuovo.dipendente@azienda.com\",\n  \"Password\": \"password123\",\n  \"Ruolo\": \"dipendente\"\n}"
             },
             "url": {
               "raw": "http://localhost:3001/api/utenti/register",
@@ -27,7 +27,7 @@
           }
         },
         {
-          "name": "Login",
+          "name": "Login (Referente)",
           "request": {
             "method": "POST",
             "header": [
@@ -35,12 +35,273 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"Email\": \"admin@demo.com\",\n  \"Password\": \"password123\"\n}"
+              "raw": "{\n  \"Email\": \"marco.rossi@azienda.com\",\n  \"Password\": \"password123\"\n}"
             },
             "url": {
               "raw": "http://localhost:3001/api/utenti/login",
               "host": ["http://localhost:3001"],
               "path": ["api", "utenti", "login"]
+            }
+          }
+        },
+        {
+          "name": "Login (Dipendente)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Email\": \"laura.bianchi@azienda.com\",\n  \"Password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3001/api/utenti/login",
+              "host": ["http://localhost:3001"],
+              "path": ["api", "utenti", "login"]
+            }
+          }
+        },
+        {
+          "name": "Get Me",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": {
+              "raw": "http://localhost:3001/api/utenti/me",
+              "host": ["http://localhost:3001"],
+              "path": ["api", "utenti", "me"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Corsi",
+      "item": [
+        {
+          "name": "Elenco Corsi",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": {
+              "raw": "http://localhost:3001/api/corsi?categoria=Sicurezza&attivo=true",
+              "host": ["http://localhost:3001"],
+              "path": ["api", "corsi"],
+              "query": [
+                { "key": "categoria", "value": "Sicurezza" },
+                { "key": "attivo", "value": "true" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Dettaglio Corso",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": {
+              "raw": "http://localhost:3001/api/corsi/1",
+              "host": ["http://localhost:3001"],
+              "path": ["api", "corsi", "1"]
+            }
+          }
+        },
+        {
+          "name": "Crea Corso",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Titolo\": \"Corso di Prova\",\n  \"Descrizione\": \"Descrizione del corso di prova\",\n  \"Categoria\": \"Informatica\",\n  \"DurataOre\": 10,\n  \"Obbligatorio\": false\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3001/api/corsi",
+              "host": ["http://localhost:3001"],
+              "path": ["api", "corsi"]
+            }
+          }
+        },
+        {
+          "name": "Modifica Corso",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Titolo\": \"Corso Aggiornato\",\n  \"DurataOre\": 12\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3001/api/corsi/1",
+              "host": ["http://localhost:3001"],
+              "path": ["api", "corsi", "1"]
+            }
+          }
+        },
+        {
+          "name": "Disattiva Corso",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": {
+              "raw": "http://localhost:3001/api/corsi/1/disattiva",
+              "host": ["http://localhost:3001"],
+              "path": ["api", "corsi", "1", "disattiva"]
+            }
+          }
+        },
+        {
+          "name": "Elimina Corso",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": {
+              "raw": "http://localhost:3001/api/corsi/1",
+              "host": ["http://localhost:3001"],
+              "path": ["api", "corsi", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Assegnazioni",
+      "item": [
+        {
+          "name": "Elenco Assegnazioni",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": {
+              "raw": "http://localhost:3001/api/assegnazioni-corsi?stato=Assegnato&categoria=Sicurezza",
+              "host": ["http://localhost:3001"],
+              "path": ["api", "assegnazioni-corsi"],
+              "query": [
+                { "key": "stato", "value": "Assegnato" },
+                { "key": "categoria", "value": "Sicurezza" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Dettaglio Assegnazione",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": {
+              "raw": "http://localhost:3001/api/assegnazioni-corsi/1",
+              "host": ["http://localhost:3001"],
+              "path": ["api", "assegnazioni-corsi", "1"]
+            }
+          }
+        },
+        {
+          "name": "Crea Assegnazione",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"CorsoID\": 1,\n  \"DipendenteID\": 2,\n  \"DataScadenza\": \"2026-12-31\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3001/api/assegnazioni-corsi",
+              "host": ["http://localhost:3001"],
+              "path": ["api", "assegnazioni-corsi"]
+            }
+          }
+        },
+        {
+          "name": "Completa Assegnazione",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": {
+              "raw": "http://localhost:3001/api/assegnazioni-corsi/1/completa",
+              "host": ["http://localhost:3001"],
+              "path": ["api", "assegnazioni-corsi", "1", "completa"]
+            }
+          }
+        },
+        {
+          "name": "Annulla Assegnazione",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": {
+              "raw": "http://localhost:3001/api/assegnazioni-corsi/1/annulla",
+              "host": ["http://localhost:3001"],
+              "path": ["api", "assegnazioni-corsi", "1", "annulla"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Dipendenti",
+      "item": [
+        {
+          "name": "Elenco Dipendenti",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": {
+              "raw": "http://localhost:3001/api/dipendenti",
+              "host": ["http://localhost:3001"],
+              "path": ["api", "dipendenti"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Statistiche",
+      "item": [
+        {
+          "name": "Statistiche Academy",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": {
+              "raw": "http://localhost:3001/api/statistiche/academy?mese=2026-07&categoria=Sicurezza",
+              "host": ["http://localhost:3001"],
+              "path": ["api", "statistiche", "academy"],
+              "query": [
+                { "key": "mese", "value": "2026-07" },
+                { "key": "categoria", "value": "Sicurezza" }
+              ]
             }
           }
         }
@@ -50,7 +311,7 @@
   "variable": [
     {
       "key": "token",
-      "value": "inserisci_il_token_qui"
+      "value": "inserisci_il_token_qui_dopo_il_login"
     }
   ]
 }

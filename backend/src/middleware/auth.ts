@@ -24,10 +24,10 @@ export const authenticate = (req: AuthRequest, res: Response, next: NextFunction
   }
 };
 
-export const requireRole = (role: string) => {
+export const requireRole = (...roles: string[]) => {
   return (req: AuthRequest, res: Response, next: NextFunction): void => {
-    if (!req.user || req.user.Ruolo !== role) {
-      res.status(403).json({ error: `Accesso riservato: ruolo ${role} richiesto` });
+    if (!req.user || !roles.includes(req.user.Ruolo)) {
+      res.status(403).json({ error: `Accesso riservato: ruolo ${roles.join(' o ')} richiesto` });
       return;
     }
     next();
