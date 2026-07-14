@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import api from '../services/api';
+import { formatDate } from '../utils/formatters';
 import AssegnazioneForm from './AssegnazioneForm';
 
 const AssegnazioniList = () => {
@@ -132,10 +133,10 @@ const AssegnazioniList = () => {
                 <td>{a.DipendenteNome} {a.DipendenteCognome}</td>
                 <td><strong>{a.CorsoTitolo}</strong></td>
                 <td><span className="badge" style={{ background: 'rgba(139,92,246,0.2)', color: 'var(--purple-light)' }}>{a.Categoria}</span></td>
-                <td>{a.DataAssegnazione}</td>
-                <td>{a.DataScadenza}</td>
+                <td>{formatDate(a.DataAssegnazione)}</td>
+                <td>{formatDate(a.DataScadenza)}</td>
                 <td><span className="badge" style={badgeStato(a.Stato)}>{a.Stato}</span></td>
-                <td>{a.DataCompletamento || '-'}</td>
+                <td>{formatDate(a.DataCompletamento)}</td>
                 <td className="actions-cell">
                   <button className="btn btn-sm btn-primary" onClick={() => { setEditAssegnazione(a); setShowForm(true); }}>Modifica</button>
                   {a.Stato !== 'Annullato' && a.Stato !== 'Completato' && (

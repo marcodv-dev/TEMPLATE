@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import api from '../services/api';
+import { formatDate } from '../utils/formatters';
 
 const MieAssegnazioni = () => {
   const [assegnazioni, setAssegnazioni] = useState<any[]>([]);
@@ -68,13 +69,13 @@ const MieAssegnazioni = () => {
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', margin: '1rem 0' }}>
           <div><strong>Categoria:</strong> {detail.Categoria}</div>
           <div><strong>Durata:</strong> {detail.DurataOre}h</div>
-          <div><strong>Assegnato il:</strong> {detail.DataAssegnazione}</div>
-          <div><strong>Scadenza:</strong> {detail.DataScadenza}</div>
+            <div><strong>Assegnato il:</strong> {formatDate(detail.DataAssegnazione)}</div>
+            <div><strong>Scadenza:</strong> {formatDate(detail.DataScadenza)}</div>
           <div>
             <strong>Stato:</strong>{' '}
             <span className="badge" style={badgeStato(detail.Stato)}>{detail.Stato}</span>
           </div>
-          {detail.DataCompletamento && <div><strong>Completato il:</strong> {detail.DataCompletamento}</div>}
+          {detail.DataCompletamento && <div><strong>Completato il:</strong> {formatDate(detail.DataCompletamento)}</div>}
         </div>
         {detail.CorsoDescrizione && (
           <div style={{ margin: '1rem 0', color: 'var(--text-muted)' }}>
@@ -157,10 +158,10 @@ const MieAssegnazioni = () => {
                 <td><strong>{a.CorsoTitolo}</strong></td>
                 <td><span className="badge" style={{ background: 'rgba(139,92,246,0.2)', color: 'var(--purple-light)' }}>{a.Categoria}</span></td>
                 <td>{a.DurataOre}h</td>
-                <td>{a.DataAssegnazione}</td>
-                <td style={{ color: a.Stato === 'Scaduto' ? '#fca5a5' : 'inherit' }}>{a.DataScadenza}</td>
+                <td>{formatDate(a.DataAssegnazione)}</td>
+                <td style={{ color: a.Stato === 'Scaduto' ? '#fca5a5' : 'inherit' }}>{formatDate(a.DataScadenza)}</td>
                 <td><span className="badge" style={badgeStato(a.Stato)}>{a.Stato}</span></td>
-                <td>{a.DataCompletamento || '-'}</td>
+                <td>{formatDate(a.DataCompletamento)}</td>
                 <td>
                   <button className="btn btn-sm btn-primary" onClick={() => setDetail(a)}>Dettaglio</button>
                   {a.Stato === 'Assegnato' && (
