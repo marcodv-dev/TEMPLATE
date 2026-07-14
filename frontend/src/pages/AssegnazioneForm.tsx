@@ -53,7 +53,7 @@ const AssegnazioneForm = ({ assegnazione, dipendenti, onClose, onSave, onError }
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label>Corso</label>
-            <select value={CorsoID} onChange={e => setCorsoID(e.target.value)} required disabled={!!assegnazione}>
+            <select value={CorsoID} onChange={e => setCorsoID(e.target.value)} required /* disabled={!!assegnazione} */>
               <option value="">Seleziona corso</option>
               {corsi.map((c: any) => (
                 <option key={c.CorsoID} value={c.CorsoID}>{c.Titolo} ({c.Categoria})</option>
@@ -62,7 +62,7 @@ const AssegnazioneForm = ({ assegnazione, dipendenti, onClose, onSave, onError }
           </div>
           <div className="form-group">
             <label>Dipendente</label>
-            <select value={DipendenteID} onChange={e => setDipendenteID(e.target.value)} required disabled={!!assegnazione}>
+            <select value={DipendenteID} onChange={e => setDipendenteID(e.target.value)} required /* disabled={!!assegnazione} */>
               <option value="">Seleziona dipendente</option>
               {dipendenti.map((d: any) => (
                 <option key={d.UtenteID} value={d.UtenteID}>{d.Nome} {d.Cognome}</option>
