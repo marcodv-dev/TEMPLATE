@@ -162,7 +162,7 @@ const MieAssegnazioni = () => {
                 <td style={{ color: a.Stato === 'Scaduto' ? '#fca5a5' : 'inherit' }}>{formatDate(a.DataScadenza)}</td>
                 <td><span className="badge" style={badgeStato(a.Stato)}>{a.Stato}</span></td>
                 <td>{formatDate(a.DataCompletamento)}</td>
-                <td>
+                <td style={{display:'flex',flexDirection:'column',gap:5}}>
                   <button className="btn btn-sm btn-primary" onClick={() => setDetail(a)}>Dettaglio</button>
                   {a.Stato === 'Assegnato' && (
                     <button className="btn btn-sm btn-primary" onClick={() => completa(a.AssegnazioneID)} style={{ marginLeft: '0.4rem' }}>Completa</button>
